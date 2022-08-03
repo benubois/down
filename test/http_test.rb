@@ -237,7 +237,7 @@ describe Down::Http do
 
     it "saves normalizes headers with #download" do
       tempfile = Down::Http.download("#{$httpbin}/response-headers?content-type=image/jpeg")
-      assert_equal "image/jpeg", tempfile.content_type
+      assert_equal "image/jpeg", tempfile.headers["Content-Type"]
     end
 
     it "saves response data" do
@@ -257,7 +257,6 @@ describe Down::Http do
       io = Down::Http.open("#{$httpbin}/user-agent")
       assert_equal "Down/#{Down::VERSION}", JSON.parse(io.read)["user-agent"]
     end
-    
 
     it "forwards additional options to HTTP.rb" do
       io = Down::Http.open("#{$httpbin}/user-agent", headers: {"User-Agent" => "Janko"})
