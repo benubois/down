@@ -237,6 +237,7 @@ describe Down::Http do
 
     it "saves normalizes headers with #download" do
       tempfile = Down::Http.download("#{$httpbin}/response-headers?content-type=image/jpeg")
+      pp tempfile.headers
       assert_equal "image/jpeg", tempfile.headers["Content-Type"]
     end
 
