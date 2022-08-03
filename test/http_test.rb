@@ -235,6 +235,11 @@ describe Down::Http do
       assert_equal true, JSON.parse(tempfile.read)["authenticated"]
     end
 
+    it "saves normalizes headers with #download" do
+      tempfile = Down::Http.download("#{$httpbin}/response-headers?content-type=image/jpeg")
+      assert_equal "image/jpeg", tempfile.content_type
+    end
+
     it "saves response data" do
       io = Down::Http.open("#{$httpbin}/response-headers?Foo=Bar&bar=baz")
       assert_equal 200,                  io.data[:status]
