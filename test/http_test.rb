@@ -257,6 +257,7 @@ describe Down::Http do
       io = Down::Http.open("#{$httpbin}/user-agent")
       assert_equal "Down/#{Down::VERSION}", JSON.parse(io.read)["user-agent"]
     end
+    
 
     it "forwards additional options to HTTP.rb" do
       io = Down::Http.open("#{$httpbin}/user-agent", headers: {"User-Agent" => "Janko"})
